@@ -1,13 +1,21 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+
+import { router as userRouter } from './resources/user/user.routes';
+import { router as statRouter } from './resources/stat/stat.routes';
 
 dotenv.config();
 
 const app = express();
-
 const port = process.env.PORT;
-app.get('/', (req, res) => res.send('h1'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/api/user', userRouter);
+app.use('/api/stat', statRouter);
 
 async function start() {
   try {

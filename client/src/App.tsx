@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.scss';
-import { Header } from './components';
-import rock from './img/rock.png';
-// import 'materialize-css/dist/css/materialize.min.css';
+import { MainPage } from './pages';
+import 'materialize-css/dist/css/materialize.min.css';
 
 function App(): JSX.Element {
   return (
     <div>
-      <Header></Header>
+      <MainPage />
     </div>
   );
 }

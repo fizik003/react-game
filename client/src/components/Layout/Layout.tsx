@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import Header from '../Header';
 
-const Layout = () => {
-  return <div></div>;
+interface VidePropsInterface {
+  children?: ReactNode;
+}
+
+const Layout = ({ children }: VidePropsInterface) => {
+  return (
+    <div className="layout">
+      <Header />
+      <div className="layout__container">{children}</div>
+    </div>
+  );
 };
 
 export default Layout;

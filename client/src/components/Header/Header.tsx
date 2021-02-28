@@ -1,19 +1,33 @@
 import React from 'react';
 
+import './Header.scss';
+
 const Header = () => {
   return (
-    <div>
-      <h1>header</h1>
-      <button className="waves-effect waves-light btn">button</button>
-      <button
-        className="btn waves-effect waves-light"
-        type="submit"
-        name="action"
-      >
-        Submit
-        <i className="material-icons right">send</i>
-      </button>
-    </div>
+    <React.Fragment>
+      <nav className="navigation green">
+        <div className="nav-wrapper container">
+          <a href="#" className="brand-logo navigation__logo">
+            RPC
+          </a>
+
+          <ul
+            id="nav-mobile"
+            className="right hide-on-med-and-down navigation__item-list"
+          >
+            <li className="navigation__item">
+              <a href="sass.html">Sass</a>
+            </li>
+            <li className="navigation__item">
+              <a href="badges.html">Components</a>
+            </li>
+            <li className="navigation__item">
+              <a href="collapsible.html">JavaScript</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </React.Fragment>
   );
 };
 

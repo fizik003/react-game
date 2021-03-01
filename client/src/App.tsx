@@ -1,7 +1,9 @@
 import React from 'react';
-import './App.scss';
+
 import { MainPage } from './pages';
-import 'materialize-css/dist/css/materialize.min.css';
+
+import './App.scss';
+import 'normalize.css';
 
 function App(): JSX.Element {
   return (

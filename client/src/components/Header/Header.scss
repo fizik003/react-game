@@ -1,5 +1,7 @@
-.navigation {
-  &__logo {
-    font-weight: bold;
+.header {
+  &__btn {
+    @media (max-width: 900px) {
+      display: none;
+    }
   }
 }

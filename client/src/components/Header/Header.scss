@@ -1,7 +1,7 @@
 .header {
-  &__btn {
-    @media (max-width: 900px) {
-      display: none;
-    }
+  &__logo {
+    font-family: 'Fredoka One', cursive;
+    font-weight: bold;
+    font-size: 32px;
   }
 }

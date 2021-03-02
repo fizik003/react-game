@@ -8,8 +8,8 @@ interface VidePropsInterface {
 const Layout = ({ children }: VidePropsInterface) => {
   return (
     <div className="layout">
-      <Header />
-      <div className="layout__container">{children}</div>
+      <Header className="mb-3 header" />
+      <main>{children}</main>
     </div>
   );
 };

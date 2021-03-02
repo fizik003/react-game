@@ -1,0 +1,44 @@
+.game {
+}
+
+.card {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__scoreboard {
+    display: flex;
+    justify-content: center;
+    font-family: 'Freckle Face', cursive;
+    font-size: 32px;
+  }
+
+  &__game-place {
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 540px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__place {
+    &-user {
+      @media (max-width: 540px) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__figures {
+    display: flex;
+
+    &-item {
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
+}

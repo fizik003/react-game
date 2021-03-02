@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import cn from 'classnames';
 
-import 'Card.scss';
+import './Card.scss';
 
 interface CardInterface {
   cardTitle?: string;
@@ -11,7 +11,7 @@ interface CardInterface {
 
 const Card = ({ cardTitle, children, className }: CardInterface) => {
   return (
-    <div className={cn('card-title', className)} style={{ width: '18rem' }}>
+    <div className={cn('card', className)}>
       <div className="card-body">
         <h5 className={cn('card-title', { 'd-none': !cardTitle })}>
           {cardTitle}

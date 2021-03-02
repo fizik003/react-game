@@ -7,15 +7,22 @@ import './App.scss';
 import 'normalize.css';
 
 function App(): JSX.Element {
-  const [currentFigure, setCurrentFigure] = useState('');
-  const [startBotChoicie, setStartBotChoice] = useState(false);
+  // const [currentFigure, setCurrentFigure] = useState('');
+  // const [startBotChoicie, setStartBotChoice] = useState(false);
+  // const [botChoice, setBotChoice] = useState('');
+  // const [score, setScore] = useState([0, 0]);
+
+  const [state, setState] = useState({
+    userFigure: '',
+    botFigure: '',
+    startBotChoice: false,
+    score: [0, 0],
+  });
   return (
     <globalStateContext.Provider
       value={{
-        currentFigure: currentFigure,
-        setCurrentFigure: setCurrentFigure,
-        startBotChoicie,
-        setStartBotChoice,
+        state,
+        setState,
       }}
     >
       <div>

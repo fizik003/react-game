@@ -30,13 +30,19 @@ const PlayFigure = ({
     currentFigure,
     setStartBotChoice,
     startBotChoicie,
+    setBotChoice,
+    botChoice,
   } = useContext(globalStateContext);
 
   const clickHandler = () => {
     setCurrentFigure && setCurrentFigure(kinfOfFigure);
     if (setStartBotChoice) {
       setStartBotChoice(true);
-      setTimeout(() => setStartBotChoice(false), 3000);
+      setTimeout(() => {
+        setStartBotChoice(false);
+        const bot = Object.keys(figure)[Math.floor(Math.random() * 3)];
+        setBotChoice && setBotChoice(bot);
+      }, 3000);
     }
   };
   return (
@@ -44,6 +50,7 @@ const PlayFigure = ({
       className={cn('figure', className, {
         clickable: clickable,
         'figure_user-active': clickable && currentFigure === kinfOfFigure,
+        'figure_bot-active': !clickable && botChoice === kinfOfFigure,
         figure_bot: !clickable,
         figure_animation: !clickable && startBotChoicie,
       })}

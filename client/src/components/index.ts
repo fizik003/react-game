@@ -4,4 +4,4 @@ export { default as Footer } from './Footer';
 export { default as Card } from './Card';
 export { default as Game } from './Game';
 export { default as PlayFigure } from './PlayFigure';
-export { default as ListFigures } from './ListFigures';
+export { default as Button } from './Button';

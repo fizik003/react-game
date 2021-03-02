@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import cn from 'classnames';
 
 import './Game.scss';
 import { Card } from '../';
 import PlayFigure from '../PlayFigure';
 import { globalStateContext } from '../../context/globalStateContext';
+import Button from '../Button';
 
 interface GameInterface {
   className?: string;
@@ -17,6 +18,16 @@ const Game = ({ className }: GameInterface): JSX.Element => {
   if (currentFigure) {
     animationChoice();
   }
+
+  const { setBotChoice, setCurrentFigure } = useContext(globalStateContext);
+
+  const againBtnClickHandler = () => {
+    if (setBotChoice && setCurrentFigure) {
+      setBotChoice('');
+      setCurrentFigure('');
+    }
+  };
+
   return (
     <div className={cn('game', className)}>
       <Card className="game__card ">
@@ -67,6 +78,14 @@ const Game = ({ className }: GameInterface): JSX.Element => {
                 />
               </div>
             </div>
+          </div>
+          <div className="card__btns">
+            <Button
+              classNames="card__btns-again"
+              onClick={againBtnClickHandler}
+            >
+              Again
+            </Button>
           </div>
         </div>
       </Card>

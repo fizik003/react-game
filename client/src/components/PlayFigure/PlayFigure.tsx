@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import paper from '../../img/paper.png';
@@ -25,37 +25,70 @@ const PlayFigure = ({
     scissors,
   };
 
-  const {
-    setCurrentFigure,
-    currentFigure,
-    setStartBotChoice,
-    startBotChoicie,
-    setBotChoice,
-    botChoice,
-  } = useContext(globalStateContext);
+  const [goCheck, setGoCheck] = useState(false);
+
+  const { state, setState } = useContext(globalStateContext);
 
   const clickHandler = () => {
-    setCurrentFigure && setCurrentFigure(kinfOfFigure);
-    if (setStartBotChoice) {
-      setStartBotChoice(true);
+    if (state && setState) {
+      const bot = Object.keys(figure)[Math.floor(Math.random() * 3)];
+      setState(prevState => ({
+        ...prevState,
+        userFigure: kinfOfFigure,
+        startBotChoice: true,
+        botFigure: bot,
+      }));
+
       setTimeout(() => {
-        setStartBotChoice(false);
-        const bot = Object.keys(figure)[Math.floor(Math.random() * 3)];
-        setBotChoice && setBotChoice(bot);
-      }, 3000);
+        setState(prevState => ({
+          ...prevState,
+          startBotChoice: false,
+        }));
+        setGoCheck(true);
+      }, 2000);
+    }
+  };
+  useEffect(() => {
+    if (goCheck) {
+      checkWhoWin();
+      setGoCheck(false);
+    }
+  }, [goCheck]);
+
+  const checkWhoWin = () => {
+    if (state && setState) {
+      let [scoreUser, scoreBot] = state.score;
+      const { botFigure, userFigure } = state;
+      const objCompare: { [key: string]: boolean } = {
+        scissorsrock: false,
+        scissorspaper: true,
+        rockscissors: true,
+        rockpaper: false,
+        paperscissors: false,
+        paperrock: true,
+      };
+      console.log(state.userFigure + state.botFigure);
+      objCompare[userFigure + botFigure] ? (scoreUser += 1) : (scoreBot += 1);
+      console.log(scoreBot, scoreUser);
+      setState(prevState => ({
+        ...prevState,
+        score: [scoreUser, scoreBot],
+      }));
     }
   };
   return (
     <div
       className={cn('figure', className, {
         clickable: clickable,
-        'figure_user-active': clickable && currentFigure === kinfOfFigure,
-        'figure_bot-active': !clickable && botChoice === kinfOfFigure,
+        'figure_user-active': clickable && state?.userFigure === kinfOfFigure,
+        'figure_bot-active': !clickable && state?.botFigure === kinfOfFigure,
         figure_bot: !clickable,
-        figure_animation: !clickable && startBotChoicie,
+        figure_animation: !clickable && state?.startBotChoice,
       })}
       onClick={clickHandler}
-      style={{ pointerEvents: currentFigure || !clickable ? 'none' : 'auto' }}
+      style={{
+        pointerEvents: state?.userFigure || !clickable ? 'none' : 'auto',
+      }}
     >
       <img src={figure[kinfOfFigure]} alt="" />
     </div>

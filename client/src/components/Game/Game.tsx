@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import cn from 'classnames';
 
 import './Game.scss';
@@ -6,25 +6,24 @@ import { Card } from '../';
 import PlayFigure from '../PlayFigure';
 import { globalStateContext } from '../../context/globalStateContext';
 import Button from '../Button';
+import { set } from 'mongoose';
 
 interface GameInterface {
   className?: string;
 }
 
-const animationChoice = () => {};
-
 const Game = ({ className }: GameInterface): JSX.Element => {
-  const { currentFigure } = useContext(globalStateContext);
-  if (currentFigure) {
-    animationChoice();
-  }
-
-  const { setBotChoice, setCurrentFigure } = useContext(globalStateContext);
+  const { setState, state } = useContext(globalStateContext);
 
   const againBtnClickHandler = () => {
-    if (setBotChoice && setCurrentFigure) {
-      setBotChoice('');
-      setCurrentFigure('');
+    if (setState) {
+      setState(prevState => ({ ...prevState, botFigure: '', userFigure: '' }));
+    }
+  };
+
+  const restartBtnClickHandler = () => {
+    if (setState) {
+      setState(prevState => ({ ...prevState, score: [0, 0] }));
     }
   };
 
@@ -33,12 +32,12 @@ const Game = ({ className }: GameInterface): JSX.Element => {
       <Card className="game__card ">
         <div className="card__wrapper">
           <div className="card__scoreboard">
-            <span className="card__scoreboard-text">1</span>:
-            <span className="card__scoreboard-text">2</span>
+            <span className="card__scoreboard-text">{state?.score[0]}</span>:
+            <span className="card__scoreboard-text">{state?.score[1]}</span>
           </div>
           <div className="card__game-place">
             <div className="card__place-user">
-              <div className="card__user-name">
+              <div className="card__name">
                 <span>yuru</span>
               </div>
               <div className="card__figures">
@@ -60,7 +59,7 @@ const Game = ({ className }: GameInterface): JSX.Element => {
               </div>
             </div>
             <div className="card__place-bot">
-              <div className="card__bot-name">
+              <div className="card__name">
                 <span>Vasiliy</span>
               </div>
               <div className="card__figures">
@@ -83,8 +82,18 @@ const Game = ({ className }: GameInterface): JSX.Element => {
             <Button
               classNames="card__btns-again"
               onClick={againBtnClickHandler}
+              type="btn-warning"
+              disabled={state?.startBotChoice}
             >
               Again
+            </Button>
+            <Button
+              classNames="card__btns-restart"
+              type="btn-warning"
+              onClick={restartBtnClickHandler}
+              disabled={state?.startBotChoice}
+            >
+              Restart
             </Button>
           </div>
         </div>

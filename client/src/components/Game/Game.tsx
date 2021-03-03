@@ -1,12 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import cn from 'classnames';
 
 import './Game.scss';
-import { Card } from '../';
-import PlayFigure from '../PlayFigure';
+import { Card, GameResult, Button, PlayFigure } from '../';
 import { globalStateContext } from '../../context/globalStateContext';
-import Button from '../Button';
-import { set } from 'mongoose';
+
+import win from '../../img/win.png';
+import lose from '../../img/lose.png';
+import draw from '../../img/draw.png';
+
+const img: { [ket: string]: string } = {
+  user: win,
+  bot: lose,
+  draw: draw,
+};
 
 interface GameInterface {
   className?: string;
@@ -14,6 +21,11 @@ interface GameInterface {
 
 const Game = ({ className }: GameInterface): JSX.Element => {
   const { setState, state } = useContext(globalStateContext);
+  let imgSrc: string;
+
+  if (state && setState) {
+    imgSrc = img[state?.whoWin];
+  }
 
   const againBtnClickHandler = () => {
     if (setState) {
@@ -27,9 +39,16 @@ const Game = ({ className }: GameInterface): JSX.Element => {
     }
   };
 
+  console.log(1);
+
   return (
     <div className={cn('game', className)}>
       <Card className="game__card ">
+        <GameResult
+          classNames="game__result"
+          imgSrc={img[state ? state.whoWin : '1']}
+        />
+
         <div className="card__wrapper">
           <div className="card__scoreboard">
             <span className="card__scoreboard-text">{state?.score[0]}</span>:

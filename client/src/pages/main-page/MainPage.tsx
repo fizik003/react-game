@@ -1,5 +1,5 @@
 import React from 'react';
-import { bounce, swing } from 'react-animations';
+import { swing } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
 
 import { Layout, Game } from '../../components';

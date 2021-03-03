@@ -15,6 +15,8 @@ export interface State {
   botFigure: string;
   startBotChoice: boolean;
   score: number[];
+  whoWin: string;
+  showResult: boolean;
 }
 
 interface StateContextInterface {

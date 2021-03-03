@@ -17,6 +17,8 @@ function App(): JSX.Element {
     botFigure: '',
     startBotChoice: false,
     score: [0, 0],
+    whoWin: '',
+    showResult: false,
   });
   return (
     <globalStateContext.Provider

@@ -58,7 +58,13 @@ const PlayFigure = ({
   const checkWhoWin = () => {
     if (state && setState) {
       let [scoreUser, scoreBot] = state.score;
-      const { botFigure, userFigure } = state;
+      let { botFigure, userFigure, whoWin } = state;
+      if (botFigure === userFigure)
+        return setState(prevValue => ({
+          ...prevValue,
+          whoWin: 'draw',
+          showResult: true,
+        }));
       const objCompare: { [key: string]: boolean } = {
         scissorsrock: false,
         scissorspaper: true,
@@ -68,11 +74,19 @@ const PlayFigure = ({
         paperrock: true,
       };
       console.log(state.userFigure + state.botFigure);
-      objCompare[userFigure + botFigure] ? (scoreUser += 1) : (scoreBot += 1);
-      console.log(scoreBot, scoreUser);
+      if (objCompare[userFigure + botFigure]) {
+        scoreUser += 1;
+        whoWin = 'user';
+      } else {
+        scoreBot += 1;
+        whoWin = 'bot';
+      }
+
       setState(prevState => ({
         ...prevState,
         score: [scoreUser, scoreBot],
+        whoWin: whoWin,
+        showResult: true,
       }));
     }
   };

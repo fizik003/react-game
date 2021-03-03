@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import useSound from 'use-sound';
 
-import { MainPage } from './pages';
 import { globalStateContext } from './context/globalStateContext';
+import { routes } from './components/routes';
 
 import 'normalize.css';
 import './App.scss';
 
 import fonSound from './audio/fon.mp3';
+import { Auth } from './components';
 
 function App(): JSX.Element {
-  // const [currentFigure, setCurrentFigure] = useState('');
-  // const [startBotChoicie, setStartBotChoice] = useState(false);
-  // const [botChoice, setBotChoice] = useState('');
-  // const [score, setScore] = useState([0, 0]);
-
   const [state, setState] = useState({
     userFigure: '',
     botFigure: '',
@@ -23,6 +19,7 @@ function App(): JSX.Element {
     whoWin: '',
     showResult: false,
     volume: 0.5,
+    userName: '',
   });
   const [playBackgroundSound, { isPlaying }] = useSound(fonSound, {
     volume: state.volume - 0.3,
@@ -30,7 +27,7 @@ function App(): JSX.Element {
   });
 
   useEffect(() => {
-    if (!isPlaying) {
+    if (!isPlaying && state.userName) {
       playBackgroundSound();
     }
   });
@@ -41,9 +38,7 @@ function App(): JSX.Element {
         setState,
       }}
     >
-      <div>
-        <MainPage />
-      </div>
+      {routes(!!state.userName)}
     </globalStateContext.Provider>
   );
 }

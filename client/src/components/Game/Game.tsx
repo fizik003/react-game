@@ -35,7 +35,12 @@ const Game = ({ className }: GameInterface): JSX.Element => {
 
   const restartBtnClickHandler = () => {
     if (setState) {
-      setState(prevState => ({ ...prevState, score: [0, 0] }));
+      setState(prevState => ({
+        ...prevState,
+        score: [0, 0],
+        userFigure: '',
+        botFigure: '',
+      }));
     }
   };
 
@@ -57,7 +62,7 @@ const Game = ({ className }: GameInterface): JSX.Element => {
           <div className="card__game-place">
             <div className="card__place-user">
               <div className="card__name">
-                <span>yuru</span>
+                <span>{state?.userName}</span>
               </div>
               <div className="card__figures">
                 <PlayFigure

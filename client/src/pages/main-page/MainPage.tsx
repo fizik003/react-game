@@ -2,7 +2,7 @@ import React from 'react';
 import { swing } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
 
-import { Layout, Game } from '../../components';
+import { Layout, Game, Auth } from '../../components';
 
 import './MainPage.scss';
 

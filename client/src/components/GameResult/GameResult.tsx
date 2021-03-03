@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import cn from 'classnames';
 import { pulse } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
+import useSound from 'use-sound';
 
 import './GameResult.scss';
 

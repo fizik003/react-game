@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
+import useSound from 'use-sound';
 import cn from 'classnames';
 
 import paper from '../../img/paper.png';
 import rock from '../../img/rock.png';
-import scissors from '../../img/scissors.png';
 
+import scissors from '../../img/scissors.png';
+import selectSound from '../../audio/select.mp3';
+import hoverSound from '../../audio/hover_select.mp3';
+import resultSound from '../../audio/result.mp3';
 import './PlayFigure.scss';
 import { globalStateContext } from '../../context/globalStateContext';
 
@@ -25,12 +29,17 @@ const PlayFigure = ({
     scissors,
   };
 
-  const [goCheck, setGoCheck] = useState(false);
-
   const { state, setState } = useContext(globalStateContext);
+
+  const [playSelect] = useSound(selectSound, { volume: state?.volume });
+  const [hoverSelect] = useSound(hoverSound, { volume: state?.volume });
+  const [playResultSound] = useSound(resultSound, { volume: state?.volume });
+
+  const [goCheck, setGoCheck] = useState(false);
 
   const clickHandler = () => {
     if (state && setState) {
+      playSelect();
       const bot = Object.keys(figure)[Math.floor(Math.random() * 3)];
       setState(prevState => ({
         ...prevState,
@@ -59,12 +68,14 @@ const PlayFigure = ({
     if (state && setState) {
       let [scoreUser, scoreBot] = state.score;
       let { botFigure, userFigure, whoWin } = state;
-      if (botFigure === userFigure)
+      if (botFigure === userFigure) {
+        playResultSound();
         return setState(prevValue => ({
           ...prevValue,
           whoWin: 'draw',
           showResult: true,
         }));
+      }
       const objCompare: { [key: string]: boolean } = {
         scissorsrock: false,
         scissorspaper: true,
@@ -88,6 +99,7 @@ const PlayFigure = ({
         whoWin: whoWin,
         showResult: true,
       }));
+      playResultSound();
     }
   };
   return (
@@ -99,6 +111,7 @@ const PlayFigure = ({
         figure_bot: !clickable,
         figure_animation: !clickable && state?.startBotChoice,
       })}
+      onMouseEnter={() => hoverSelect()}
       onClick={clickHandler}
       style={{
         pointerEvents: state?.userFigure || !clickable ? 'none' : 'auto',

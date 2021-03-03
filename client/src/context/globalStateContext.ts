@@ -17,6 +17,7 @@ export interface State {
   score: number[];
   whoWin: string;
   showResult: boolean;
+  volume: number;
 }
 
 interface StateContextInterface {

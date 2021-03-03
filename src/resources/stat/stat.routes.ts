@@ -49,6 +49,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
   try {
     const statData: StatRequestInterface = req.body;
+    console.log(req.body);
     const newStat: Document<StatInterface> = await statService.create(statData);
     res.status(StatusCodes.OK).json(newStat);
   } catch (err) {

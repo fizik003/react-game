@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useSound from 'use-sound';
 
-import { globalStateContext } from './context/globalStateContext';
+import { globalStateContext, State } from './context/globalStateContext';
 import { routes } from './components/routes';
 
 import 'normalize.css';
@@ -11,7 +11,7 @@ import fonSound from './audio/fon.mp3';
 import { Auth } from './components';
 
 function App(): JSX.Element {
-  const [state, setState] = useState({
+  const [state, setState] = useState<State>({
     userFigure: '',
     botFigure: '',
     startBotChoice: false,
@@ -20,6 +20,10 @@ function App(): JSX.Element {
     showResult: false,
     volume: 0.5,
     userName: '',
+    userStatId: '',
+    loading: false,
+    lastGame: null,
+    login: false,
   });
   const [playBackgroundSound, { isPlaying }] = useSound(fonSound, {
     volume: state.volume - 0.3,

@@ -33,6 +33,7 @@
     "lint": "tsc --noEmit && eslint --config .eslintrcc.js  src/**/*.ts{,x}",
     "format": "prettier --write src/**/*.ts{,x}"
   },
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",

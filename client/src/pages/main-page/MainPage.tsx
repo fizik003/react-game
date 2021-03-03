@@ -2,7 +2,7 @@ import React from 'react';
 import { swing } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
 
-import { Layout, Game, Auth } from '../../components';
+import { Layout, Game, Auth, ListStat } from '../../components';
 
 import './MainPage.scss';
 
@@ -24,7 +24,12 @@ const MainPage = () => {
               </Swing>
             </div>
             <div className="row">
-              <Game className="col-12 col-lg-8" />
+              <div className="main-page__game col-12 col-lg-7">
+                <Game />
+              </div>
+              <div className="main-page__list-stat col-12 col-lg-5">
+                <ListStat />
+              </div>
             </div>
           </div>
         </main>

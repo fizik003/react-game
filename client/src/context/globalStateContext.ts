@@ -1,3 +1,5 @@
+import { LastGameInterface } from './../interfaces/stat.interface';
+import { Types } from 'mongoose';
 import React, { Dispatch, SetStateAction } from 'react';
 
 // interface GlobalStateContextInterface {
@@ -19,6 +21,10 @@ export interface State {
   showResult: boolean;
   volume: number;
   userName: string;
+  userStatId: string;
+  loading: boolean;
+  lastGame: LastGameInterface[] | null;
+  login: boolean;
 }
 
 interface StateContextInterface {

@@ -23,7 +23,7 @@ export interface State {
   userName: string;
   userStatId: string;
   loading: boolean;
-  lastGame: LastGameInterface[] | null;
+  lastGame: LastGameInterface[];
   login: boolean;
 }
 

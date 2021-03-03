@@ -22,7 +22,7 @@ function App(): JSX.Element {
     userName: '',
     userStatId: '',
     loading: false,
-    lastGame: null,
+    lastGame: [],
     login: false,
   });
   const [playBackgroundSound, { isPlaying }] = useSound(fonSound, {

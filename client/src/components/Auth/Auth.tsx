@@ -5,7 +5,7 @@ import { Button, Card } from '../';
 
 import './Auth.scss';
 import { globalStateContext } from '../../context/globalStateContext';
-import { creatStat, getStat } from '../../services';
+import { creatStat, getStat } from '../../services/fetchData.services';
 import { CreateStatResponseInterface } from '../../interfaces/stat.interface';
 
 interface AuthInterface {

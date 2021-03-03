@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   CreateStatRequestInterface,
   CreateStatResponseInterface,
-} from './interfaces/stat.interface';
+} from '../interfaces/stat.interface';
 
 const headers = {
   Accept: 'application/json',

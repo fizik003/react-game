@@ -12,5 +12,5 @@ export interface CreateStatResponseInterface {
 
 export interface LastGameInterface {
   resultGame: string;
-  dateGame: Date;
+  dateGame: number;
 }

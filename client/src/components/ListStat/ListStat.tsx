@@ -5,6 +5,7 @@ import './ListStat.scss';
 import Card from '../Card';
 import { globalStateContext } from '../../context/globalStateContext';
 import Spinner from '../Spinner';
+import { LastGameInterface } from '../../interfaces/stat.interface';
 
 interface ListStatInterface {
   size?: number;
@@ -21,20 +22,35 @@ const ListStat = ({ size, classNames }: ListStatInterface) => {
       </Card>
     );
   }
+
   return (
     <React.Fragment>
-      <Card className={cn('list__card')}>
+      <Card className={cn('list__card h-100')}>
         <table className="table">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Win</th>
-              <th scope="col">Lose</th>
-              <th scope="col">Draw</th>
+              <th scope="col">Result</th>
+              <th scope="col">Date</th>
             </tr>
           </thead>
           <tbody>
+            {state?.lastGame.slice(0, 10).map((item, idx) => (
+              <tr key={item.dateGame}>
+                <th scope="row">{idx + 1}</th>
+                <td>{item.resultGame}</td>
+                <td>
+                  {new Date(item.dateGame).toLocaleString('en', {
+                    weekday: 'short',
+                    month: 'short',
+                    year: '2-digit',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                  })}
+                </td>
+              </tr>
+            ))}
             {/* <tr>
               <th scope="row">1</th>
               <td>Mark</td>

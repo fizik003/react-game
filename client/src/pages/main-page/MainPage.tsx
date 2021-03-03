@@ -24,7 +24,7 @@ const MainPage = () => {
               </Swing>
             </div>
             <div className="row">
-              <div className="main-page__game col-12 col-lg-7">
+              <div className="main-page__game col-12 col-lg-7 mb-md-3">
                 <Game />
               </div>
               <div className="main-page__list-stat col-12 col-lg-5">

@@ -68,12 +68,17 @@ const PlayFigure = ({
     if (state && setState) {
       let [scoreUser, scoreBot] = state.score;
       let { botFigure, userFigure, whoWin } = state;
+
       if (botFigure === userFigure) {
         playResultSound();
         return setState(prevValue => ({
           ...prevValue,
           whoWin: 'draw',
           showResult: true,
+          lastGame: [
+            { dateGame: Date.now(), resultGame: 'draw' },
+            ...state.lastGame,
+          ],
         }));
       }
       const objCompare: { [key: string]: boolean } = {
@@ -98,6 +103,13 @@ const PlayFigure = ({
         score: [scoreUser, scoreBot],
         whoWin: whoWin,
         showResult: true,
+        lastGame: [
+          {
+            dateGame: Date.now(),
+            resultGame: whoWin === 'user' ? 'win' : 'lose',
+          },
+          ...state.lastGame,
+        ],
       }));
       playResultSound();
     }

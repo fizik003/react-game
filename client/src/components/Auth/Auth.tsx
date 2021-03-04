@@ -29,12 +29,8 @@ const Auth = ({ classNames }: AuthInterface) => {
       setState(prevState => ({
         ...prevState,
         userName: userName,
-        userId: newStat._id,
+        userStatId: newStat._id,
       }));
-
-      const f = (await getStat()) as CreateStatResponseInterface[];
-
-      console.log(newStat.username);
     }
   };
   return (
@@ -61,7 +57,6 @@ const Auth = ({ classNames }: AuthInterface) => {
           >
             Start game
           </Button>
-          <Button type="btn-link">Create account</Button>
         </div>
       </Card>
     </div>

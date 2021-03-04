@@ -14,3 +14,17 @@ export interface LastGameInterface {
   resultGame: string;
   dateGame: number;
 }
+
+export interface StatUpdateRequestInterface {
+  countWin?: number;
+  countLose?: number;
+  countDraw?: number;
+}
+
+export interface StatUpdateResponseInterface {
+  countWin?: number;
+  countLose?: number;
+  countDraw?: number;
+  _id: string;
+  username: string;
+}

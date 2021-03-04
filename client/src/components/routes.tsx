@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import { AuthPage, MainPage } from '../pages';
+import { AuthPage, MainPage, SettingsPage, StatPage } from '../pages';
 
 export const routes = (isLogin: boolean) => {
   if (isLogin) {
@@ -10,6 +10,9 @@ export const routes = (isLogin: boolean) => {
         <Route path="/main" exact>
           <MainPage />
         </Route>
+
+        <Route path="/settings" component={SettingsPage} exact />
+        <Route path="/stat" component={StatPage} exact />
 
         <Redirect to="/main" />
       </Switch>

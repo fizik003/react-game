@@ -1,0 +1,19 @@
+footer {
+  background-color: #0d6efd;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer {
+  &__rss-logo {
+    width: 50px;
+  }
+
+  &__git-logo {
+    width: 50px;
+    img {
+      width: 100%;
+    }
+  }
+}

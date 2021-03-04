@@ -8,6 +8,7 @@ import { globalStateContext } from '../../context/globalStateContext';
 import win from '../../img/win.png';
 import lose from '../../img/lose.png';
 import draw from '../../img/draw.png';
+import { clearLocalStorage } from '../../services/localStorage.service';
 
 const img: { [ket: string]: string } = {
   user: win,
@@ -37,14 +38,25 @@ const Game = ({ className }: GameInterface): JSX.Element => {
     if (setState) {
       setState(prevState => ({
         ...prevState,
-        score: [0, 0],
+        score: [0, 0, 0],
         userFigure: '',
         botFigure: '',
       }));
     }
   };
 
-  console.log(1);
+  const newGameClickHandler = () => {
+    if (setState) {
+      setState(prevState => ({
+        ...prevState,
+        lastGame: [],
+        score: [0, 0, 0],
+        userName: '',
+        userStatId: '',
+      }));
+      clearLocalStorage();
+    }
+  };
 
   return (
     <div className={cn('game', className)}>
@@ -84,7 +96,7 @@ const Game = ({ className }: GameInterface): JSX.Element => {
             </div>
             <div className="card__place-bot">
               <div className="card__name">
-                <span>Vasiliy</span>
+                <span>Computer</span>
               </div>
               <div className="card__figures">
                 <PlayFigure
@@ -118,6 +130,14 @@ const Game = ({ className }: GameInterface): JSX.Element => {
               disabled={state?.startBotChoice}
             >
               Restart
+            </Button>
+            <Button
+              classNames="card__btns-negame w-100 mt-2"
+              type="btn-warning"
+              onClick={newGameClickHandler}
+              disabled={state?.startBotChoice}
+            >
+              New game
             </Button>
           </div>
         </div>

@@ -79,8 +79,15 @@
   &__btns {
     display: flex;
     justify-content: center;
-    .btn:not(:last-child) {
-      margin-right: 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &-again {
+      width: 47%;
+    }
+
+    &-restart {
+      width: 47%;
     }
   }
 }

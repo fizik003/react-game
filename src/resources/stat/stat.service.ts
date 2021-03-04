@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import {
   StatRequestInterface,
   StatUpdateRequestInterface,
@@ -8,7 +9,7 @@ const create = async (statData: StatRequestInterface) =>
   statRepo.create(statData);
 
 const update = async (
-  idStatRow: number,
+  idStatRow: Types.ObjectId,
   updatedData: StatUpdateRequestInterface,
 ) => statRepo.update(idStatRow, updatedData);
 

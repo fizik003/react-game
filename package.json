@@ -4,14 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "prestart": "npm run build",
     "start": "node dist/app.js",
-    "server:watch": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "prebuild": "npm run lint",
-    "lint:fix": "eslint --cache --ext .ts  --fix",
-    "lint": "eslint --cache --ext .ts",
+    "postinstall": "tsc && npm install --prefix client && npm  run build --prefix client",
     "dev": "concurrently \"npm run server:watch\" \"npm run start --prefix client\""
   },
   "repository": {

@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import {
   StatRequestInterface,
   StatUpdateRequestInterface,
@@ -9,7 +10,7 @@ const create = async (statData: StatRequestInterface) => {
 };
 
 const update = async (
-  idStatRow: number,
+  idStatRow: Types.ObjectId,
   updatedData: StatUpdateRequestInterface,
 ) => {
   delete updatedData.id;

@@ -1,8 +1,5 @@
-import { useState } from 'react';
-import {
-  CreateStatRequestInterface,
-  CreateStatResponseInterface,
-} from '../interfaces/stat.interface';
+import { CreateStatResponseInterface } from './../interfaces/stat.interface';
+import { StatUpdateRequestInterface } from '../interfaces/stat.interface';
 
 const headers = {
   Accept: 'application/json',
@@ -12,6 +9,7 @@ const headers = {
 const method: { [key: string]: string } = {
   POST: 'POST',
   GET: 'GET',
+  PUT: 'PUT',
 };
 
 const fechData = async (url: string, met: string, body?: unknown) => {
@@ -31,7 +29,17 @@ export const creatStat = async <CreateStatResponseInterface>(
   return newStat.json();
 };
 
-export const getStat = async () => {
+export const getStat = async <CreateStatResponseInterface>(): Promise<
+  CreateStatResponseInterface[]
+> => {
   const arrStat = await fechData('/api/stat', 'GET');
   return arrStat.json();
+};
+
+export const updateUserStat = async (
+  idStat: string,
+  dataStat: StatUpdateRequestInterface,
+) => {
+  const updateStat = await fechData(`/api/stat/${idStat}`, 'PUT', dataStat);
+  return updateStat.json();
 };

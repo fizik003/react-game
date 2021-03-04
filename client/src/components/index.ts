@@ -9,3 +9,4 @@ export { default as GameResult } from './GameResult';
 export { default as Auth } from './Auth';
 export { default as ListStat } from './ListStat';
 export { default as Spinner } from './Spinner';
+export { default as Settings } from './Settings';

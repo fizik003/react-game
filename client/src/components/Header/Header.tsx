@@ -46,9 +46,18 @@ const Header = ({ className }: MainPageInterface) => {
                 <Link
                   className="nav-link active"
                   aria-current="page"
-                  to="/main"
+                  to="/stat"
                 >
                   Statistics
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/settings"
+                >
+                  Settings
                 </Link>
               </li>
             </ul>

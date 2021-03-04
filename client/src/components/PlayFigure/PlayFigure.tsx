@@ -11,6 +11,9 @@ import hoverSound from '../../audio/hover_select.mp3';
 import resultSound from '../../audio/result.mp3';
 import './PlayFigure.scss';
 import { globalStateContext } from '../../context/globalStateContext';
+import { updateUserStat } from '../../services/fetchData.services';
+import { StatInterface } from '../../../../src/types/stat.interface';
+import { StatUpdateRequestInterface } from '../../interfaces/stat.interface';
 
 interface PlayFigureInterface {
   className?: string;
@@ -31,15 +34,22 @@ const PlayFigure = ({
 
   const { state, setState } = useContext(globalStateContext);
 
-  const [playSelect] = useSound(selectSound, { volume: state?.volume });
-  const [hoverSelect] = useSound(hoverSound, { volume: state?.volume });
-  const [playResultSound] = useSound(resultSound, { volume: state?.volume });
+  const [playSelect, { stop: stopSelect }] = useSound(selectSound, {
+    volume: state?.volume,
+  });
+  const [hoverSelect, { stop: stopHoverSelect }] = useSound(hoverSound, {
+    volume: state?.volume,
+  });
+  const [playResultSound, { stop: stopPlayResultSound }] = useSound(
+    resultSound,
+    { volume: state?.volume },
+  );
 
   const [goCheck, setGoCheck] = useState(false);
 
   const clickHandler = () => {
     if (state && setState) {
-      playSelect();
+      state.otherSounds && playSelect();
       const bot = Object.keys(figure)[Math.floor(Math.random() * 3)];
       setState(prevState => ({
         ...prevState,
@@ -64,17 +74,37 @@ const PlayFigure = ({
     }
   }, [goCheck]);
 
+  const sendStatToServer = async (
+    countWin: number,
+    countLose: number,
+    countDraw: number,
+  ) => {
+    if (state) {
+      const { score, userStatId } = state;
+      const date: StatUpdateRequestInterface = {
+        countWin: countWin,
+        countLose: countLose,
+        countDraw: countDraw,
+      };
+      const updatedStat = await updateUserStat(userStatId, date);
+    }
+  };
+
   const checkWhoWin = () => {
     if (state && setState) {
-      let [scoreUser, scoreBot] = state.score;
+      let [scoreUser, scoreBot, scoreDraw] = state.score;
       let { botFigure, userFigure, whoWin } = state;
 
       if (botFigure === userFigure) {
-        playResultSound();
+        if (state.otherSounds) {
+          playResultSound();
+        }
+        sendStatToServer(scoreUser, scoreBot, scoreDraw + 1);
         return setState(prevValue => ({
           ...prevValue,
           whoWin: 'draw',
           showResult: true,
+          score: [scoreUser, scoreBot, scoreDraw + 1],
           lastGame: [
             { dateGame: Date.now(), resultGame: 'draw' },
             ...state.lastGame,
@@ -89,7 +119,6 @@ const PlayFigure = ({
         paperscissors: false,
         paperrock: true,
       };
-      console.log(state.userFigure + state.botFigure);
       if (objCompare[userFigure + botFigure]) {
         scoreUser += 1;
         whoWin = 'user';
@@ -100,7 +129,7 @@ const PlayFigure = ({
 
       setState(prevState => ({
         ...prevState,
-        score: [scoreUser, scoreBot],
+        score: [scoreUser, scoreBot, scoreDraw],
         whoWin: whoWin,
         showResult: true,
         lastGame: [
@@ -111,7 +140,11 @@ const PlayFigure = ({
           ...state.lastGame,
         ],
       }));
-      playResultSound();
+
+      sendStatToServer(scoreUser, scoreBot, scoreDraw);
+      if (state.otherSounds) {
+        playResultSound();
+      }
     }
   };
   return (
@@ -123,7 +156,7 @@ const PlayFigure = ({
         figure_bot: !clickable,
         figure_animation: !clickable && state?.startBotChoice,
       })}
-      onMouseEnter={() => hoverSelect()}
+      onMouseEnter={() => state?.otherSounds && hoverSelect()}
       onClick={clickHandler}
       style={{
         pointerEvents: state?.userFigure || !clickable ? 'none' : 'auto',

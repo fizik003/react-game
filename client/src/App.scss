@@ -1,3 +1,12 @@
 body {
   background-color: rgba($color: blue, $alpha: 0.1);
+  position: relative;
+  min-height: 100vh;
+  main {
+    padding-bottom: 70px;
+  }
+}
+
+body.other {
+  background-color: rgba($color: red, $alpha: 0.3);
 }

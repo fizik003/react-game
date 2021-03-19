@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node dist/app.js",
     "postinstall": "tsc && npm install --prefix client && npm  run build --prefix client",
-    "dev": "concurrently \"npm run server:watch\" \"npm run start --prefix client\""
+    "dev": "concurrently \"npm run server:watch\" \"npm run start --prefix client\"",
+    "server:watch": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "server:build": "tsc"
   },
   "repository": {
     "type": "git",

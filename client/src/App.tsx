@@ -13,7 +13,6 @@ import 'normalize.css';
 import './App.scss';
 
 import fonSound from './audio/fon.mp3';
-import userEvent from '@testing-library/user-event';
 
 function App(): JSX.Element {
   const [state, setState] = useState<State>({

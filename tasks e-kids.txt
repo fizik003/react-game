@@ -1,0 +1,13 @@
+7kyu
++https://www.codewars.com/kata/5959ec605595565f5c00002b/train/python
++https://www.codewars.com/kata/59a8570b570190d313000037/train/python
++https://www.codewars.com/kata/51675d17e0c1bed195000001/train/python
+https://www.codewars.com/kata/51fd6bc82bc150b28e0000ce/train/python
+https://www.codewars.com/kata/59a602dc57019008d900004e/train/python
+https://www.codewars.com/kata/604287495a72ae00131685c7/train/python
+https://www.codewars.com/kata/5a06238a80171f824300003c/train/python
+
+
+
+
+

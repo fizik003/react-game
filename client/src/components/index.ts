@@ -1,0 +1,12 @@
+export { default as Header } from './Header';
+export { default as Layout } from './Layout';
+export { default as Footer } from './Footer';
+export { default as Card } from './Card';
+export { default as Game } from './Game';
+export { default as PlayFigure } from './PlayFigure';
+export { default as Button } from './Button';
+export { default as GameResult } from './GameResult';
+export { default as Auth } from './Auth';
+export { default as ListStat } from './ListStat';
+export { default as Spinner } from './Spinner';
+export { default as Settings } from './Settings';

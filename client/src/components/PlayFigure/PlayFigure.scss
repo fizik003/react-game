@@ -1,0 +1,45 @@
+.figure {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #0d6efd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.5s;
+
+  &_user-active,
+  &_bot-active {
+    background-color: #dc3546;
+  }
+
+  img {
+    width: 70%;
+    height: auto;
+  }
+
+  &_bot {
+    pointer-events: none;
+  }
+
+  &_animation {
+    animation-name: blinks;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+  }
+}
+
+.clickable:hover {
+  transform: scale(1.2);
+}
+
+@keyframes blinks {
+  0% {
+    background-color: #0d6efd;
+  }
+  100% {
+    background-color: #dc3546;
+  }
+}
